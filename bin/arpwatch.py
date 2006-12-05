@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# $Id$
+
 import cPickle, sys
 import dnet, dpkt
 import dsniff
@@ -11,17 +13,16 @@ class ArpWatch(dsniff.Handler):
     def setup(self):
         try:
             self.cache = cPickle.load(open(self.filename))
-            print >>sys.stderr, 'loaded %s' % self.filename
+            print >>sys.stderr, 'loaded %s entries from %s' % (len(self.cache), self.filename)
         except IOError:
             self.cache = {}
         self.subscribe('pcap', 'arp[6:2] = 2', self.recv_pkt)
 
     def teardown(self):
         cPickle.dump(self.cache, open(self.filename, 'wb'))
-        print >>sys.stderr, 'saved %s' % self.filename
+        print >>sys.stderr, 'saved %s entries to %s' % (len(self.cache), self.opts.filename)
 
     def recv_pkt(self, pc, pkt):
-        #print dpkt.hexdump(str(pkt))
         arp = dpkt.ethernet.Ethernet(pkt).arp
         try:
             old = self.cache[arp.spa]
