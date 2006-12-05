@@ -20,7 +20,7 @@ class AbstractVisitor(object):
         for child in node.getChildNodes():
             return self.visit(child, **kw)
     visitExpression = default
-        
+
 class SafeEval(AbstractVisitor):
     def visitConst(self, node, **kw):
         return node.value
@@ -30,10 +30,10 @@ class SafeEval(AbstractVisitor):
 
     def visitTuple(self, node, **kw):
         return tuple([ self.visit(i) for i in node.nodes ])
-    
+
     def visitList(self, node, **kw):
         return [ self.visit(i) for i in node.nodes ]
-    
+
 def parse(s):
     try:
         ast = compiler.parse(s, 'eval')

@@ -31,11 +31,11 @@ class MimeParser(object):
                 self._parse_next()
             except NeedInput:
                 break
-    
+
     def _parse_start(self):
         self.handle_start()
         self._parse_next = self._parse_field
-        
+
     def _parse_field(self):
         line = self.getline()
         if line.startswith(' ') or line.startswith('\t'):
@@ -63,12 +63,12 @@ class MimeParser(object):
 
     def _end_fields(self):
         self._parse_next = self._parse_body
-    
+
     def _parse_body(self):
         self.handle_body(self._data)
         self.handle_end()
         self.reset()
-    
+
     def handle_start(self):
         """Override to handle start of a message."""
         pass
@@ -76,7 +76,7 @@ class MimeParser(object):
     def handle_end(self):
         """Override to handle the end of a message."""
         pass
-        
+
     def handle_field(self, name, value):
         """Override to handle header field."""
         pass

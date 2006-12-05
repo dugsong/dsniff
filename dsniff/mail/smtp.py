@@ -9,7 +9,7 @@ SMTP_NONE, SMTP_AUTH, SMTP_HELO, SMTP_MAIL, SMTP_RCPT, SMTP_DATA = range(6)
 class SMTPHandler(dsniff.Handler):
     name = 'smtp'
     events = ('auth', 'email')
-    
+
     def setup(self):
         self.subscribe('service', 'smtp', self.recv_flow)
 

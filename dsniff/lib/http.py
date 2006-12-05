@@ -31,7 +31,7 @@ class HttpParser(mime.MimeParser):
         'BASELINE-CONTROL'
         ))
     proto = 'HTTP'
-    
+
     def reset(self, data=None):
         """Reset HTTP parser."""
         super(HttpParser, self).reset(data)
@@ -46,7 +46,7 @@ class HttpParser(mime.MimeParser):
 
         l = line.split(None, 2)
         if len(l) == 2:
-            l.append('')	# XXX - empty version
+            l.append('')    # XXX - empty version
 
         if l[0].startswith(self.proto):
             # HTTP response
@@ -63,17 +63,17 @@ class HttpParser(mime.MimeParser):
                 return
             if method not in self.methods or \
                    not version.startswith(self.proto):
-                return	# XXX - be forgiving of mid-stream parsing
+                return  # XXX - be forgiving of mid-stream parsing
             if method == 'HEAD':
                 self.body_len = 0
             self.handle_request(method, uri, version)
-        
+
         super(HttpParser, self)._parse_start()
-    
+
     def handle_headers(self, headers):
         """Overload to handle a dict of HTTP headers."""
         pass
-    
+
     def handle_request(self, method, uri, version):
         """Overload to handle a new HTTP request."""
         pass
@@ -110,7 +110,7 @@ class HttpParser(mime.MimeParser):
         else:
             self.zlib = None
             self.gzcnt = 0
-    
+
     def _zlib_decompress(self, buf):
         if self.zlib is not None:
             if self.gzcnt:
@@ -120,12 +120,12 @@ class HttpParser(mime.MimeParser):
             if buf:
                 buf = self.zlib.decompress(buf)
         return buf
-    
+
     def __parse_body_close(self):
         self.handle_body(self._zlib_decompress(self._data))
         self._data = ''
         # XXX - self.handle_end() never called!
-    
+
     def __parse_body_len(self):
         buf = self._data[:self.body_len]
         self.handle_body(self._zlib_decompress(buf))
@@ -155,7 +155,7 @@ class HttpParser(mime.MimeParser):
                 self.reset(self._data)
             else:
                 self.chunk_len = None
-        
+
 if __name__ == '__main__':
     import sys
     class TestParser(HttpParser):
@@ -164,7 +164,7 @@ if __name__ == '__main__':
 
         def handle_response(self, *args):
             print 'RESPONSE:', args
-            
+
         def handle_headers(self, headers):
             print 'HDRS:', headers
 

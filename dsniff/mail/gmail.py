@@ -7,7 +7,7 @@ import _webmail
 
 class GmailParser(_webmail.Parser):
     data_re = re.compile(r'D\((.*?)\);\n', re.DOTALL)
-    
+
     def handle_request(self, method, uri, version):
         if method == 'GET' and uri.startswith('/mail/') and 'view=cv' in uri:
             self.collect_response(self.__parse_get)
@@ -20,7 +20,7 @@ class GmailParser(_webmail.Parser):
             hdrs = [ (h.capitalize(), d[h][0].rstrip(', '))
                      for h in ('from', 'to', 'subject', 'cc') if d[h][0] ]
             self.publish_email(hdrs, '\n'.join(d['msgbody']))
-    
+
     def __parse_get(self, flow, buf):
         hdrs, body = [], []
         for s in self.data_re.findall(buf):

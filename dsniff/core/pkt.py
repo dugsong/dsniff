@@ -25,12 +25,12 @@ class PcapFactory(object):
 class PcapHandler(dsniff.Handler):
     """Packet capture handler."""
     name = 'pcap'
-    
+
     interfaces = []
     snaplen = 31337
     prefilter = ''
     debug = 0
-    
+
     def setup(self):
         if self.interfaces:
             l = []
@@ -43,7 +43,7 @@ class PcapHandler(dsniff.Handler):
 
     def __pcap_open(self, name, **kwargs):
         def __recv_pkt(ts, pkt, pc):
-            dsniff.Handler.ts = ts	# XXX
+            dsniff.Handler.ts = ts  # XXX
             dsniff.Handler.pkt = pkt
             dsniff.Handler.pc = pc
             self.publish(pc.event, pc, pkt)
@@ -65,7 +65,7 @@ class PcapHandler(dsniff.Handler):
             return '%s (%s, snaplen: %d)' % (pc.name, pc.filter, pc.snaplen)
         else:
             return '%s (snaplen: %d)' % (pc.name, pc.snaplen)
-    
+
     def _register(self, event, callback):
         # Create new pcap handle as needed for new subscriptions
         pcfilter = ' and '.join(filter(None, [ self.prefilter, event ]))
@@ -87,14 +87,14 @@ class PcapHandler(dsniff.Handler):
                 print >>sys.stderr, 'opened', self.__pcap_info(pc)
                 self.pcaps[event].append(pc)
         super(PcapHandler, self)._register(event, callback)
-    
+
     def _unregister(self, event, callback):
         super(PcapHandler, self)._unregister(event, callback)
         pcaps = self.pcaps.pop(event)
         if not self.callbacks:
             # XXX - cache last set of pcaps
             self.pcaps[None] = pcaps
-    
+
     def teardown(self):
         for pcaps in self.pcaps.itervalues():
             for pc in pcaps:

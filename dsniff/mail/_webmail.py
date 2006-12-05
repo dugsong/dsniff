@@ -1,3 +1,4 @@
+# $Id$
 
 import os, rfc822
 import dsniff
@@ -8,7 +9,7 @@ class Parser(http.HttpParser):
         super(Parser, self).__init__()
         self.__handler = handler
         self.__f = self.__get_response = None
-        
+
     def collect_request(self, callback):
         self.__f = io.Tempfile()
         self.__callback = callback
@@ -19,11 +20,11 @@ class Parser(http.HttpParser):
 
     def handle_headers(self, hdrs):
         self.__ctype = hdrs.get('content-type', '')
-        
+
     def handle_response(self, version, status, reason):
         if self.__get_response:
             self.__f = io.Tempfile()
-        
+
     def handle_body(self, buf):
         if self.__f:
             self.__f.write(buf)
@@ -37,7 +38,7 @@ class Parser(http.HttpParser):
 
     def get_postvars(self, buf):
         return http.parse_POST(self.__ctype, buf)
-    
+
     def publish_email(self, hdrs, body):
         f = io.Tempfile(prefix='email')
         hdrs = dict(hdrs)
@@ -52,7 +53,7 @@ class Parser(http.HttpParser):
 
 class Handler(dsniff.Handler):
     events = ('email', )
-    
+
     def setup(self):
         self.subscribe('service', self.name, self.recv_flow)
 

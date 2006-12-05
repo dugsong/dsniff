@@ -18,13 +18,13 @@ class Itree(object):
     def __init__(self):
         self.root = None
         self.count = 0
-    
+
     def __max_fixup(self, elm):
         elm.max = elm.high
         for i in range(2):
             if elm.kids[i] and elm.kids[i].max > elm.max:
                 elm.max = elm.kids[i].max
-    
+
     def __rotate(self, elm, n):
         tmp = elm.kids[n ^ 1]
         elm.kids[n ^ 1] = tmp.kids[n]
@@ -40,7 +40,7 @@ class Itree(object):
             self.root = tmp
         tmp.kids[n] = elm
         elm.parent = tmp
-        
+
         self.__max_fixup(elm)
         self.__max_fixup(tmp)
 
@@ -60,7 +60,7 @@ class Itree(object):
         else:
             self.root = elm
         self.count += 1
-        
+
         # rebalance and color
         parent = elm.parent
         while parent and parent.color == RED:
@@ -87,7 +87,7 @@ class Itree(object):
             self.__match(elm.kids[LEFT], low, high, matches)
         if elm.kids[RIGHT] and high >= elm.low and low <= elm.kids[RIGHT].max:
             self.__match(elm.kids[RIGHT], low, high, matches)
-            
+
     def match(self, low, high=None):
         """Perform stabbing query for all overlapping intervals
         returning a list of matched items.
@@ -105,7 +105,7 @@ class Itree(object):
 if __name__ == '__main__':
     import unittest
     import dnet
-    
+
     class ItreeTestCase(unittest.TestCase):
         def test_itree(self):
             it = Itree()
@@ -127,5 +127,5 @@ if __name__ == '__main__':
             assert it.match(dnet.addr('10.0.0.0'), dnet.addr('10.255.255.255')) == ['10/8']
             assert it.match(dnet.addr('10.0.1.0'), dnet.addr('10.0.1.255')) == ['10/8']
             assert it.match(dnet.addr('1.0.0.10')) == []
-    
+
     unittest.main()

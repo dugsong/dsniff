@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# $Id$
+
 import base64, time
 import dsniff
 from dsniff.lib import http
@@ -8,17 +10,17 @@ class UrlParser(http.HttpParser):
     def __init__(self, flow):
         super(UrlParser, self).__init__(self)
         self.flow = flow
-        
+
     def handle_request(self, method, uri, version):
         self.req = { 'method':method, 'uri':uri, 'version':version }
-    
+
     def _get_http_user(self, hdrs):
         if 'authorization' in hdrs:
             scheme, auth = hdrs['authorization'].split(None, 1)
             if scheme == 'Basic':
                 return base64.decodestring(auth).split(':')[0]
         return '-'
-    
+
     def handle_headers(self, hdrs):
         d = self.req
         d['ip'] = self.flow.src
@@ -35,7 +37,7 @@ class UrlParser(http.HttpParser):
         print repr('%(ip)s - %(user)s [%(timestamp)s] '
                    '"%(method)s %(url)s" - - '
                    '"%(referer)s" "%(user-agent)s"' % d).strip("'")
-        
+
 class URLSnarf(dsniff.Handler):
     def setup(self):
         self.subscribe('service', 'http', self.recv_flow)

@@ -9,10 +9,10 @@ POP_NONE, POP_RETR, POP_DATA = range(3)
 class POPHandler(dsniff.Handler):
     name = 'pop'
     events = ('auth', 'email')
-    
+
     def setup(self):
         self.subscribe('service', 'pop', self.recv_flow)
-    
+
     def recv_flow(self, flow):
         if self in flow.save:
             d = flow.save[self]

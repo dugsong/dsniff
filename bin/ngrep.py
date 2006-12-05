@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+# $Id$
+
 import os, re, sys, time
 import dpkt, dsniff
 
@@ -7,7 +9,7 @@ class Ngrep(dsniff.Handler):
     name = 'ngrep'
     pat = None
     hex = kill = quiet = noheader = raw = False
-    
+
     def setup(self):
         if os.isatty(sys.stdout.fileno()):
             def _color(s, arrow):
@@ -18,7 +20,7 @@ class Ngrep(dsniff.Handler):
                 print s
         self.color = _color
         self.subscribe('flow', '', self.recv_flow)
-    
+
     def _grep_data(self, flow, buf, arrow):
         if self.pat is None or self.pat.search(buf):
             if not self.noheader:
@@ -33,7 +35,7 @@ class Ngrep(dsniff.Handler):
                 self.color(repr(buf), arrow)
             if self.kill:
                 flow.kill()
-    
+
     def recv_flow(self, flow):
         if self.raw:
             if flow.state == dsniff.FLOW_START:

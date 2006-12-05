@@ -1,4 +1,4 @@
-# $Id: net.py 220 2005-10-25 16:31:13Z dugsong $
+# $Id$
 
 proto2num = {
     'ip':0, 'icmp':1, 'igmp':2, 'tcp':6, 'udp':17, 'ddp':37, 'ip6':46,
@@ -13,14 +13,14 @@ serv2num = {
     'echo_reply':[(1,0),(58,129)], 'dst_unreach':[(1,3),(58,1)],
     'src_quench':(1,4), 'redirect':(1,5), 'echo':[(1,8),(58,128)],
     'time_exceeded':[(1,11),(58,3)], 'param_prob':[(1,12),(58,4)],
-    
+
     'dns':(17,53), 'dhcp':[(17,67),(17,68)], 'tftp':(17,69),
     'krb5':[(17,88),(6,88)], 'portmap':(17,111), 'ntp':(17,123),
     'netbios-ns':(17,137), 'netbios-dgm':(17,138), 'snmp':(17,161),
     'slp':(17,427), 'ike':(17,500), 'syslog':(17,514), 'rip':(17,520),
     'hsrp':(17,1985), 'nfs':[(17,2049),(6,2049)],
     'rendezvous':(17,5353),
-    
+
     'ftp':(6,21), 'ssh':(6,22), 'telnet':(6,23), 'smtp':[(6,25),(6,587)],
     'http':(6,80), 'pop':[(6,110), (6,109)], 'ident':(6,113), 'nntp':(6,119),
     'ms-rpc':[(6,135),(17,135),(6,1025)], 'netbios-ssn':[(6,139),(6,445)],
@@ -51,7 +51,7 @@ prog2num = {
     'status': 100024, 'bootparamd': 100026, 'ypupdated': 100028,
     'keyserv': 100029, 'tfsd': 100037, 'nsed': 100038, 'nsemntd': 100039,
     'cmsd': 100068, 'ttdbserver': 100083, 'pcnfsd': 150001, 'amd': 300019,
-    'netinfo': 200100000, 'netinfobind': 200100001, 
+    'netinfo': 200100000, 'netinfobind': 200100001,
     }
 prog2name = dict(zip(prog2num.itervalues(), prog2num.iterkeys()))
 
@@ -134,5 +134,5 @@ if __name__ == '__main__':
             self.failUnless(serv_ntoa(6, 22) == 'ssh')
         def test_serv_aton(self):
             self.failUnless(serv_aton('ssh') == (6, 22))
-            
+
     unittest.main()

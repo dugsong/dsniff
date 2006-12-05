@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+# $Id$
 
 import os, time
 import dsniff
@@ -6,7 +9,7 @@ class MailSnarf(dsniff.Handler):
     def setup(self):
         self.subscribe('*', 'email', self.recv_email)
         self.__last_hdrs = None
-        
+
     def recv_email(self, hdrs, msgfile):
         """Output mail in BSD mbox format.
         """

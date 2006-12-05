@@ -20,7 +20,7 @@ class IPHandler(dsniff.Handler):
     def _unregister(self, event, callback):
         self.unsubscribe('pcap', event, self.recv_pkt)
         super(IPHandler, self)._unregister(event, callback)
-        
+
     def recv_pkt(self, pc, pkt):
         # Try to handle both IPv4 and IPv6...
         dlt = pc.datalink()
@@ -32,15 +32,15 @@ class IPHandler(dsniff.Handler):
             ip = eth.data
         elif dlt == pcap.DLT_LOOP or dlt == pcap.DLT_NULL:
             loop = dpkt.loopback.Loopback(pkt)
-            if loop.family > 1500:	# XXX - see dpkt.loopback
+            if loop.family > 1500:  # XXX - see dpkt.loopback
                 ip = loop.data.data
             else:
                 ip = loop.data
         else:
             ip = dpkt.ip.IP(pkt[pc.dloff:])
 
-        dsniff.Handler.ip = ip	# XXX
-        
+        dsniff.Handler.ip = ip  # XXX
+
         if isinstance(ip, dpkt.ip.IP):
             if ip.off & 0x3fff: # IP_MF|IP_OFFMASK
                 ip = self.defrag.defrag(ip)

@@ -16,7 +16,7 @@ class FlowHalf(object):
         self.bytes = bytes
         self.port = self.data = None
         self.save = {}
-        
+
     def readlines(self, keepends=False): # XXX - need max buffer size
         """Return list of lines parsed from a flow data stream.
         """
@@ -30,7 +30,7 @@ class FlowHalf(object):
             if not keepends:
                 line = line.rstrip()
             yield line
-    
+
     def unpack(self, dpkt_cls, maxsz=1000 * 1000):
         """Iterator to return dpkt_cls instances parsed from a flow
         data stream.
@@ -52,7 +52,7 @@ class Flow(object):
     __slots__ = ('client', 'server', 'p', 'stime', 'etime',
                  'state', 'save', 'half', 'callbacks')
     _Half = FlowHalf
-    
+
     def __init__(self, ts, ip):
         def _ip2addr(x):
             a = dnet.addr()
@@ -70,10 +70,10 @@ class Flow(object):
     dst = property(lambda self: self.server.addr)
     sport = property(lambda self: self.client.port)
     dport = property(lambda self: self.server.port)
-    
+
     def flip(self):
         self.client, self.server = self.server, self.client
-    
+
     def register(self, callback):
         self.callbacks.append(callback)
 
@@ -87,7 +87,7 @@ class Flow(object):
                 cb(self)
             except:
                 traceback.print_exc()
-    
+
     def update(self, ts, ip):
         self.etime = ts
         half = self.half[ip.src]
@@ -102,7 +102,7 @@ class Flow(object):
 
     def __repr__(self):
         return 'Flow(%(src)s, %(dst)s, %(p)s, %(sport)s, %(dport)s)' % self
-    
+
     def __str__(self, arrow='>'):
         p = net.proto_ntoa(self.p)
         if self.dport is not None:
@@ -114,7 +114,7 @@ class Flow(object):
 
 class IpFlow(Flow):
     __slots__ = Flow.__slots__
-    
+
     def update(self, ts, ip):
         Flow.update(self, ts, ip)
         self.data = str(ip.data)
@@ -124,7 +124,7 @@ _icmp_typemap = { 0:8, 10:9, 14:13, 16:15, 18:17, 34:33, 36:35, 38:37 }
 
 class IcmpFlow(Flow):
     __slots__ = Flow.__slots__ + ('type', 'code')
-    
+
     def __init__(self, ts, ip):
         Flow.__init__(self, ts, ip)
         t = ip.icmp.type
@@ -134,7 +134,7 @@ class IcmpFlow(Flow):
         else:
             self.type = self.server.port = t
         self.code = self.client.port = None
-            
+
     def update(self, ts, ip):
         Flow.update(self, ts, ip)
         self.half[ip.src].data = str(ip.icmp.data)
@@ -151,10 +151,10 @@ class UdpFlow(Flow):
 
 class TcpHalf(FlowHalf):
     __slots__ = FlowHalf.__slots__ + ('flags', 'reasm')
-    
+
 class TcpFlow(Flow):
     _Half = TcpHalf
-    
+
     def __init__(self, ts, ip):
         Flow.__init__(self, ts, ip)
         self.client.port = ip.tcp.sport
@@ -173,7 +173,7 @@ class TcpFlow(Flow):
             half.reasm = reasm.Reassembler(ip.tcp.seq + is_syn, ip.tcp.win)
         if ip.tcp.data:
             half.data = half.reasm.reassemble(ip.tcp.seq, ip.tcp.data)
-    
+
     def kill(self, rawsock):
         # XXX - should be FlowHalf method, abstracted to .inject()?
         # e.g. flow.client.kill(), flow.client.send('foo')
@@ -186,7 +186,7 @@ class TcpFlow(Flow):
                                flags=dnet.TH_RST)
             ip.data = tcp
             ip.len += len(tcp)
-            
+
             for i in range(3):
                 ip.id = id(ip)
                 tcp.seq += i * tcp.win
@@ -205,7 +205,7 @@ class FlowHandler(dsniff.Handler):
     name = 'flow'
     max_flows = 5000
     flowcls = { 1:IcmpFlow, 6:TcpFlow, 17:UdpFlow }
-    
+
     def setup(self):
         def __lru_flows(cache):
             l = [ (v.etime, k) for k, v in cache.iteritems() ]
@@ -218,7 +218,7 @@ class FlowHandler(dsniff.Handler):
 
     def teardown(self):
         self.cache.clear()
-    
+
     def __resubscribe(self):
         s = self.fcap.pcap_filter()
         if self.pcap_filter != s:
@@ -226,12 +226,12 @@ class FlowHandler(dsniff.Handler):
                 self.unsubscribe('ip', self.pcap_filter, self.recv_ip)
             self.pcap_filter = s
             self.subscribe('ip', self.pcap_filter, self.recv_ip)
-    
+
     def _register(self, event, callback):
         self.fcap.add(event, event)
         self.__resubscribe()
         super(FlowHandler, self)._register(event, callback)
-        
+
     def _unregister(self, event, callback):
         self.fcap.delete(event, event)
         self.__resubscribe()
@@ -252,19 +252,19 @@ class FlowHandler(dsniff.Handler):
         if ip.src > ip.dst:
             return (ip.dst, ip.src, ip.p)
         return (ip.src, ip.dst, ip.p)
-    
+
     def _set_direction(self, flow, ip):
         t = ip.data
         if (ip.p == 6 and t.flags & 0x12 == 0x12) or \
            (flow.sport is not None and flow.sport != flow.dport and
             flow.sport in self.fcap.matcher.dport):
             flow.flip()
-    
+
     def recv_ip(self, ip):
-        if ip.v == 6:	# XXX - fake the funk
+        if ip.v == 6:   # XXX - fake the funk
             ip.p = ip.nxt
             ip.len = 40 + ip.plen
-        
+
         # XXX - decapsulate tunnel protocols
         if ip.p == 47: # GRE
             if ip.gre.p == 0x800: # ETH_TYPE_IP
@@ -289,9 +289,9 @@ class FlowHandler(dsniff.Handler):
                     flow.register(cb)
             flow.publish(FLOW_START)
 
-        dsniff.Handler.flow = flow	# XXX
+        dsniff.Handler.flow = flow  # XXX
         flow.update(self.ts, ip)
-        
+
         if flow.client.data:
             flow.publish(FLOW_CLIENT_DATA)
             flow.client.data = None

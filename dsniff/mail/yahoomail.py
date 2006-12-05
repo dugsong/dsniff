@@ -29,7 +29,7 @@ class YmailParser(_webmail.Parser):
         body = self.body_re.search(buf).group('body')
         if hdrs and body:
             self.publish_email(hdrs, body)
-    
+
     def __parse_post(self, flow, buf):
         d = self.get_postvars(buf)
         hdrs = [ ('From', self.client_addrs.get(flow.client.addr, '')),
@@ -42,7 +42,7 @@ class YmailParser(_webmail.Parser):
 class YmailHandler(_webmail.Handler):
     name = 'yahoomail'
     parser = YmailParser
-        
+
 if __name__ == '__main__':
     dsniff.test()
 

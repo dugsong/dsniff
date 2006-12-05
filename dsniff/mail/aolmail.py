@@ -1,3 +1,4 @@
+# $Id$
 
 import re
 import dsniff
@@ -10,7 +11,7 @@ class AOLMailParser(_webmail.Parser):
         'displayCc':'Cc', 'messageID':'Message-Id', 'subject':'Subject'
         }
     msg_re = re.compile(r'^message\.(?P<k>.*?) = (?P<v>.*);$')
-    
+
     def handle_request(self, method, uri, version):
         if method == 'GET' and 'GetMessage.aspx' in uri:
             self.collect_response(self.__parse_get)
@@ -24,7 +25,7 @@ class AOLMailParser(_webmail.Parser):
         body = d['PlainBody'][0]
         if hdrs and body:
             self.publish_email(hdrs, body)
-    
+
     def __parse_get(self, flow, buf):
         hdrs, body = [], None
         for line in buf.splitlines():

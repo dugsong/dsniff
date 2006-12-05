@@ -1,4 +1,4 @@
-# $Id: reasm.py 309 2006-01-24 04:19:58Z dugsong $
+# $Id$
 
 """Reassembly helpers.
 XXX - only implements 'BSD' algorithm
@@ -20,7 +20,7 @@ class Cache(dict):
                  reclaimfn=lambda d: d.popitem()):
         self.maxsz = maxsz
         self._reclaimfn = reclaimfn
-    
+
     def __setitem__(self, k, v):
         if self.__len__() >= self.maxsz:
             self._reclaimfn(self)
@@ -37,7 +37,7 @@ class Reassembler(object):
         self.cur = isn
         self.win = win
         self.q = [] # heapq of (seq, buf)
-    
+
     def reassemble(self, seq, buf):
         """Given a sequence number and buffer, return sequenced data.
         XXX - half-duplex, doesn't require ACK of reassembled data
@@ -77,17 +77,17 @@ class Defragger(object):
             ipq = self.pkts[t] = Reassembler()
             ipq.totlen = 0
             ipq.bufs = []
-        
-        off = (ip.off & 0x1fff) << 3	# IP_OFFMASK
+
+        off = (ip.off & 0x1fff) << 3    # IP_OFFMASK
         buf = ipq.reassemble(off, str(ip.data))
         if buf:
             ipq.bufs.append(buf)
 
         if ipq.totlen == 0:
             # Check for last frag.
-            if ip.off & 0x2000 == 0:	# IP_MF
+            if ip.off & 0x2000 == 0:    # IP_MF
                 ipq.totlen = off + len(ip.data)
-        
+
         if ipq.totlen != 0 and sum(map(len, ipq.bufs)) == ipq.totlen:
             ip2 = copy.copy(ip)
             ip2.off = ip2.sum = 0
@@ -99,7 +99,7 @@ class Defragger(object):
 
 if __name__ == '__main__':
     import unittest
-    
+
     class ReasmTest(unittest.TestCase):
         def test_reasm(self):
             # Shankar and Paxson "Active Mapping" test, pinched from fragtest
@@ -114,8 +114,8 @@ if __name__ == '__main__':
                 )
             data_policy = {
                 '1'*3*8 + '4'*2*8 + '2'*8 + '3'*3*8 + '6'*3*8 : 'BSD',
-                '1'*8 + '4'*3*8 + '2'*2*8 + '5'*3*8 + '6'*3*8 : 'BSD-right', 
-                '1'*3*8 + '4'*2*8 + '2'*8 + '5'*3*8 + '6'*3*8 : 'Linux', 
+                '1'*8 + '4'*3*8 + '2'*2*8 + '5'*3*8 + '6'*3*8 : 'BSD-right',
+                '1'*3*8 + '4'*2*8 + '2'*8 + '5'*3*8 + '6'*3*8 : 'Linux',
                 '1'*3*8 + '4'*8 + '2'*2*8 + '3'*3*8 + '6'*3*8 : 'First',
                 '1'*8 + '4'*4*8 + '2'*8 + '5'*3*8 + '6'*3*8 : 'Last',
                 }

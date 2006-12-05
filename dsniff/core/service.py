@@ -1,3 +1,4 @@
+# $Id$
 
 import dsniff
 from dsniff.core import flow
@@ -26,7 +27,7 @@ class ServiceHandler(dsniff.Handler):
         else:
             self._register = self.__proxy_register
             self._unregister = self.__proxy_unregister
-    
+
     def recv_flow(self, f):
         if '_service' in f.save:
             self.publish(f.save['_service'], f)
@@ -63,7 +64,7 @@ class ServiceHandler(dsniff.Handler):
                     del half.save['_appid_buf']
                     del half.save['_appid']
                 f.unregister(self.recv_flow)
-    
+
     def __event_to_fcaps(self, event):
         if event in _services:
             return [ _services[event] ]
@@ -75,7 +76,7 @@ class ServiceHandler(dsniff.Handler):
                 l.append('%s and dst port %s' %
                          (net.proto_ntoa(p), ' or '.join(ports)))
         return l
-    
+
     def __proxy_register(self, event, callback):
         # XXX - just proxy to FlowHandler
         fcaps = self.__event_to_fcaps(event)

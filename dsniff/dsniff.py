@@ -8,8 +8,8 @@ import fnmatch, optparse, os, signal, sys, types
 import event
 
 _op = optparse.OptionParser(usage='%prog [options] [filter]')
-handlers = {}	# name:handler instances
-config = {}	# name:{var:val} handler configs
+handlers = {}   # name:handler instances
+config = {}     # name:{var:val} handler configs
 
 add_option = _op.add_option
 set_usage = _op.set_usage
@@ -26,26 +26,26 @@ class Handler(object):
     """
     __metaclass__ = _MetaHandler  # XXX - stuff class into Handler.subclasses
 
-    name = None		# handler name
-    events = ()		# list of events published
+    name = None     # handler name
+    events = ()     # list of events published
 
-    _subclasses = {}	# name:handler class
-    
+    _subclasses = {}    # name:handler class
+
     def __init__(self, *args, **kwargs):
         global config
         if self.name in config:
-            self.__dict__.update(config[self.name])	# XXX
+            self.__dict__.update(config[self.name]) # XXX
         self.subscriptions = {}
         self.callbacks = {}
         self.setup()
-        
+
     def setup(self):
         """Override with any setup actions (e.g. subscriptions, etc.)."""
         pass
-    
+
     def subscribe(self, name, event, callback):
         """Subscribe to a handler's event.
-        
+
         Arguments:
         name     -- name of handler (or match pattern)
         event    -- name of event published by handler
@@ -71,7 +71,7 @@ class Handler(object):
         if pub not in self.subscriptions:
             self.subscriptions[pub] = set()
         self.subscriptions[pub].add((event, callback))
-    
+
     def unsubscribe(self, name, event, callback):
         """Unsubscribe from a handler's event.
 
@@ -97,7 +97,7 @@ class Handler(object):
         l.remove(callback)
         if not l:
             del self.callbacks[event]
-        
+
     def publish(self, event, *args, **kwargs):
         """Send an event to any registered listeners."""
         if event in self.callbacks:
@@ -147,15 +147,15 @@ class Program(object):
                    help='debug level')
         self.opts = None
         self.args = ()
-    
+
     def setup(self):
         """Override with any setup actions (such as adding options, etc.)"""
         pass
-    
+
     def teardown(self):
         """Override with any teardown actions."""
         pass
-    
+
     def getopt(self, argv):
         global _op, config
         self.opts, self.args = _op.parse_args(argv)
@@ -179,7 +179,7 @@ class Program(object):
             subclasses = find_subclasses(Handler, __import__('__main__'))
             if not subclasses:
                 raise RuntimeError, 'no Handler subclasses found'
-        
+
         event.init()
         self.setup()
         self.getopt(argv)
@@ -187,12 +187,12 @@ class Program(object):
         # XXX - configure pcap filter
         global config
         config['pcap']['prefilter'] = ' '.join(self.args)
-        
+
         for cls in subclasses:
             handlers[cls.name] = cls()
         for sig in (signal.SIGINT, signal.SIGTERM):
             event.signal(sig, event.abort)
-        
+
         event.dispatch()
 
         for h in handlers.itervalues():

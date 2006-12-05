@@ -22,7 +22,7 @@ class HotmailParser(_webmail.Parser):
         body = d['body'][0]
         if hdrs and body:
             self.publish_email(hdrs, body)
-    
+
     def __parse_get(self, flow, buf):
         m = self.hdrs_body_re.search(buf)
         body = m.group('body')
@@ -33,7 +33,7 @@ class HotmailParser(_webmail.Parser):
 class HotmailHandler(_webmail.Handler):
     name = 'hotmail'
     parser = HotmailParser
-    
+
 if __name__ == '__main__':
     dsniff.test()
 
