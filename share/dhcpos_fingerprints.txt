@@ -1,0 +1,37 @@
+# $Id$
+#
+# dhcpos_fingerprints.txt
+#
+# based on http://www.nts.ku.edu/downloads/DHCPListener.tgz
+# updated slightly since then
+#
+1,3,6,15,Apple Airport Express or PalmOS
+1,2,3,6,12,15,17,23,28,29,31,33,40,41,42,43,Amino Aminet Set Top Box
+1,3,6,15,66,69,43,176,Avaya IP Telephone
+1,3,7,6,15,66,69,43,176,Avaya IP Telephone
+1,3,6,15,42,66,150,Cisco IP Phone 7912
+1,28,3,6,15,67,4,7,Cisco Wireless Access Point
+1,66,6,3,67,12,150,Cisco 2900 Catalyst XL
+1,3,7,44,51,54,58,59,12,15,144,18,Hewlett-Packard JetDirect
+1,3,44,6,7,12,15,22,54,58,59,69,18,144,Hewlett-Packard Color LaserJet
+1,3,6,12,15,44,46,47,Linksys Router
+1,3,6,12,15,28,44,Linksys WRT54G
+1,28,2,3,15,6,12,40,41,42,Linux
+1,3,6,12,15,17,23,28,29,31,33,40,41,42,9,7,200,44,Linux 2.6.5-7.108 Suse 9.1/Novell Desktop
+1,3,6,15,112,113,78,79,95,252,Mac OS X
+1,28,2,3,15,6,12,ISC-DHCP client
+1,15,3,6,44,46,47,31,33,249,43,Microsoft Windows XP
+1,15,3,6,44,46,47,31,33,249,43,252,Microsoft Windows XP
+1,15,3,6,44,46,47,31,33,43,77,Microsoft Windows ME
+1,15,3,6,44,46,47,31,33,43,Microsoft Windows 2000 Professional
+1,3,6,15,44,46,47,57,Microsoft Windows 98
+1,63,78,79,85,86,87,Microsoft Windows 98
+1,15,3,6,44,46,47,43,77,Microsoft Windows 98 SE
+1,3,6,15,12,69,70,88,42,NetBotz WallBotz 400C
+1,15,3,6,44,46,47,31,33,43,252,Netgear Wireless Access Point
+1,3,6,26,28,58,59,Nintendo Game Cube
+1,28,3,15,6,12,OpenBSD
+1,28,2,3,15,6,12,44,47,Debian Based Linux
+1,3,6,12,15,28,40,41,42,OpenWRT Kamikaze
+1,3,6,15,44,46,47,Microsoft Windows Mobile or Slingbox
+1,15,3,6,44,46,47,31,33,249,43,252,121,15,3,6,44,46,47,31,33,249,43,252,Microsoft Windows XP
