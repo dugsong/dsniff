@@ -66,6 +66,7 @@ class Flow(object):
         self.stime = self.etime = ts
         self.callbacks = []
         self.save = {}
+
     src = property(lambda self: self.client.addr)
     dst = property(lambda self: self.server.addr)
     sport = property(lambda self: self.client.port)
@@ -113,7 +114,7 @@ class Flow(object):
         return '%s %s %s %s' % (p, self.src, arrow, self.dst)
 
 class IpFlow(Flow):
-    __slots__ = Flow.__slots__
+    __slots__ = Flow.__slots__ + ('data',)
 
     def update(self, ts, ip):
         Flow.update(self, ts, ip)
