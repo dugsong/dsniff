@@ -1,37 +1,137 @@
-# $Id$
-#
-# dhcpos_fingerprints.txt
-#
-# based on http://www.nts.ku.edu/downloads/DHCPListener.tgz
-# updated slightly since then
-#
-1,3,6,15,Apple Airport Express or PalmOS
-1,2,3,6,12,15,17,23,28,29,31,33,40,41,42,43,Amino Aminet Set Top Box
+1,15,3,6,44,46,47,31,33,249,43,Windows 2003 or XP
+1,15,3,6,44,46,47,31,33,249,43,252,Windows XP
+1,15,3,6,44,46,47,31,33,249,43,252,12,Windows XP
+15,3,6,44,46,47,31,33,249,43,252,Windows XP
+15,3,6,44,46,47,31,33,249,43,252,12,Windows XP
+28,2,3,15,6,12,44,47,Windows XP
+1,15,3,6,44,46,47,31,33,43,Windows 2000
+1,15,3,6,44,46,47,31,33,43,252,Windows 2000 or Netgear Wireless
+1,15,3,6,44,46,47,31,33,43,252,12,Windows 2000
+15,3,6,44,46,47,31,33,43,Windows 2000
+15,3,6,44,46,47,31,33,43,252,Windows 2000
+1,15,3,44,46,47,6,Windows NT 4
+1,2,3,6,12,15,26,28,85,86,87,88,44,45,46,47,70,69,78,79,Windows NT 4
+1,15,3,6,44,46,47,31,33,43,77,Windows ME
+15,3,6,44,46,47,31,33,43,77,Windows ME
+1,15,3,6,44,46,47,43,77,Windows 98 SE
+1,15,3,6,44,46,47,43,77,252,Windows 98 SE
+15,3,6,44,46,47,43,77,252,Windows 98 SE
+15,3,6,44,46,47,43,77,Windows 98 SE
+1,3,6,15,44,46,47,57,Windows 98 or PocketPC or SlingBox
+1,3,15,6,44,46,47,Windows 95
+78,79,85,Novell Netware Client
+85,86,87,Novell Netware Client
+100,Novell Netware Client
+85,Novell Netware Client
+85,86,Novell Netware Client
+78,79,Novell Netware Client
+1,3,6,15,12,BeOS 4.x or BATM VOIP
+1,3,6,15,12,19,BeOS 5.0
+1,3,6,15,112,113,78,79,95,MacOS X
+1,3,6,15,112,113,78,79,95,252,MacOS X
+3,6,15,112,113,78,79,95,MacOS X
+3,6,15,112,113,78,79,95,252,MacOS X
+1,3,6,15,112,113,78,79,MacOS X
+1,3,6,15,112,113,78,79,95,44,47,MacOS X
+3,6,15,112,113,78,79,95,44,47,MacOS X
+1,3,6,15,112,113,78,79,95,252,44,47,MacOS X
+60,43,MacOS X
+1,3,6,15,33,42,44,45,46,47,69,70,71,74,78,79,Mac OS 9
+1,3,43,60,Mac ?
+1,28,2,3,15,6,12,46,44,Lindows 4.x
+1,3,6,12,15,23,28,29,31,33,40,41,42,Linux 2.4.8-pre4 i568
+3,6,12,15,17,23,28,29,31,33,40,41,42,9,7,200,44,Linux 2.4.21-202-default48 i686
+1,3,6,12,15,23,28,29,31,33,40,41,42,9,7,200,44,Linux 2.6.4
+1,3,6,15,28,12,7,9,42,48,49,Linux (Knoppix or old RedHat)
+1,3,6,12,15,17,23,28,29,31,33,40,41,42,Gentoo (2005 or older)
+1,3,6,12,15,17,23,28,29,31,33,40,41,42,119,Gentoo 2006+
+1,28,2,3,15,6,12,44,47,Debian Based Linux
+3,6,15,28,12,7,9,42,48,49,Debian Based Linux
+3,6,12,15,17,23,28,29,31,33,40,41,42,119,Generic Linux
+28,2,3,15,6,12,40,41,42,RedHat/Fedora based Linux
+1,3,6,15,28,12,7,9,42,48,49,26,RedHat/Fedora based Linux
+1,3,6,12,15,17,23,28,29,31,33,40,41,42,9,7,200,44,SuSE Linux/Novell Desktop
+1,3,6,12,15,17,23,28,29,31,33,40,41,42,9,7,44,45,46,47,SuSE Linux/Novell Desktop
+1,28,2,3,15,6,12,40,41,SLED 10
+1,28,3,15,6,12,OpenBSD
+1,66,6,3,67,12,150,Cisco 2900 Catalyst XL
+1,66,6,3,67,Cisco 2900 Catalyst XL
+1,66,6,3,67,150,43,Cisco 2900 Catalyst XL or Cisco Aironet 1240
+1,6,15,44,3,33,Cisco 3550
+1,6,15,44,52,Cisco 3560
+1,3,12,43,Etherboot or Sun Blade
+1,2,3,5,6,11,12,13,15,16,17,18,43,54,60,67,128,129,130,131,132,133,134,135,PXE Client
+1,3,3,5,6,11,12,13,15,16,17,18,43,54,60,67,128,129,130,131,132,133,134,135,PXE Client
+1,3,6,15,28,33,IBM WARP 4.1
+1,3,6,12,15,28,Linksys or Deliberant Router
+1,3,6,15,28,54,Linksys Router
+1,28,2,3,15,6,12,4,7,23,26,43,50,51,54,55,60,61,Linksys Router
+1,28,2,3,15,6,12,4,7,23,26,43,50,51,54,55,60,72,Linksys Router
+1,3,6,12,15,44,46,47,Linksys Router
+1,15,3,6,44,46,47,Linksys Router
+1,15,3,6,44,46,47,1,3,6,15,44,46,47,Linksys Router
+1,15,3,6,44,46,47,66,1,3,6,15,44,46,47,Linksys Router
+1,3,6,12,15,28,44,Linksys Router
+15,3,6,44,46,47,Linksys Router
+1,3,6,15,12,69,70,88,42,NetBotz WallBotz 400C
+3,6,15,Netgear Router
+3,1,6,15,Netgear Router
+3,1,6,15,12,Netgear Router
+3,1,6,12,15,67,66,43,Sunrocket VoIP Gizmo
+1,3,42,6,7,15,58,59,66,Linksys PAP VoIP
+1,3,6,12,15,42,43,Mediatrix VoIP Adapter
+1,2,3,6,15,42,Uniden DTA VoIP Adapter
+54,51,58,59,1,3,6,15,28,139,UniData IP Phone
 1,3,6,15,66,69,43,176,Avaya IP Telephone
 1,3,7,6,15,66,69,43,176,Avaya IP Telephone
-1,3,6,15,42,66,150,Cisco IP Phone 7912
+1,3,6,15,42,66,150,Cisco IP Phone
+1,66,6,3,15,150,35,Cisco 7940/60 IP Phone
+1,66,6,3,15,150,35,151,Cisco 7940/60 IP Phone
 1,28,3,6,15,67,4,7,Cisco Wireless Access Point
-1,66,6,3,67,12,150,Cisco 2900 Catalyst XL
-1,3,7,44,51,54,58,59,12,15,144,18,Hewlett-Packard JetDirect
-1,3,44,6,7,12,15,22,54,58,59,69,18,144,Hewlett-Packard Color LaserJet
-1,3,6,12,15,44,46,47,Linksys Router
-1,3,6,12,15,28,44,Linksys WRT54G
+1,6,15,44,3,33,150,43,Cisco Wireless Access Point
+1,66,6,15,44,3,67,33,150,43,Cisco Wireless Access Point
+1,66,6,15,44,3,67,12,33,150,43,Cisco Wireless Access Point
+1,3,15,6,43,77,Compex Wireless Access Point
+1,3,6,15,OEMed Wireless Router or Airport Express or PalmOS
+28,3,6,15,Apple Airport
+1,28,3,6,15,Apple Airport
+1,3,6,12,15,43,66,67,128,129,130,131,132,133,134,135,Symbol Wireless Access Point
+3,6,XBox
+1,3,6,XBox 360
+3,15,6,PlayStation 2
+3,6,26,28,58,59,Gamecube
+28,2,3,15,6,12,TiVo or Debian Unstable 3
+1,2,3,4,7,6,15,Replay TV
+1,2,3,6,12,15,17,23,28,29,31,33,40,41,42,43,Amino Aminet Set Top Box
+1,3,7,44,51,54,58,59,12,15,144,18,Hewlett-Packard JetDirect Generic
+1,3,44,6,7,12,15,22,54,58,59,69,18,144,Hewlett-Packard JetDirect Generic
+3,44,6,7,12,15,22,54,58,59,69,18,144,Hewlett-Packard JetDirect Generic
+3,44,6,81,7,12,15,22,54,58,59,69,18,144,Hewlett-Packard JetDirect Generic
+3,7,44,51,54,58,59,12,15,144,18,Hewlett-Packard JetDirect Generic
+1,3,44,6,7,12,15,22,54,58,59,18,144,Hewlett-Packard JetDirect Generic
+1,3,44,6,81,7,12,15,22,54,58,59,69,18,144,Hewlett-Packard JetDirect Generic
+1,3,7,44,51,54,58,59,12,144,18,Hewlett-Packard JetDirect Generic
+3,6,15,44,47,Canon Printer
+1,3,6,15,44,47,Canon Printer
+51,1,3,58,59,12,44,54,6,15,144,Xerox Printer
+1,28,3,15,6,12,44,78,79,Xerox Printer
+12,Xerox Printer
+1,2,3,6,12,15,26,28,88,44,45,46,47,70,69,78,79,Dell Printer
+1,3,6,12,15,28,42,40,44,46,Brother Printer
+1,3,6,58,59,44,46,47,Tally Printer
+1,3,6,15,28,Hotway LanDrive
+56,6,1,3,15,RIM Blackberry
+1,3,6,15,28,33,43,44,58,59,HP iLo Agent
+1,3,6,12,15,120,242,Tandberg 1000
+6,1,3,12,44,Polycom ViewStation
+# not in fingerbank
 1,28,2,3,15,6,12,40,41,42,Linux
-1,3,6,12,15,17,23,28,29,31,33,40,41,42,9,7,200,44,Linux 2.6.5-7.108 Suse 9.1/Novell Desktop
-1,3,6,15,112,113,78,79,95,252,Mac OS X
 1,28,2,3,15,6,12,ISC-DHCP client
-1,15,3,6,44,46,47,31,33,249,43,Microsoft Windows XP
-1,15,3,6,44,46,47,31,33,249,43,252,Microsoft Windows XP
-1,15,3,6,44,46,47,31,33,43,77,Microsoft Windows ME
-1,15,3,6,44,46,47,31,33,43,Microsoft Windows 2000 Professional
-1,3,6,15,44,46,47,57,Microsoft Windows 98
 1,63,78,79,85,86,87,Microsoft Windows 98
-1,15,3,6,44,46,47,43,77,Microsoft Windows 98 SE
-1,3,6,15,12,69,70,88,42,NetBotz WallBotz 400C
-1,15,3,6,44,46,47,31,33,43,252,Netgear Wireless Access Point
 1,3,6,26,28,58,59,Nintendo Game Cube
-1,28,3,15,6,12,OpenBSD
-1,28,2,3,15,6,12,44,47,Debian Based Linux
 1,3,6,12,15,28,40,41,42,OpenWRT Kamikaze
-1,3,6,15,44,46,47,Microsoft Windows Mobile or Slingbox
 1,15,3,6,44,46,47,31,33,249,43,252,121,15,3,6,44,46,47,31,33,249,43,252,Microsoft Windows XP
+1,3,6,15,119,95,252,44,46,47,Apple iPhone
+1,15,3,6,44,46,47,31,33,121,249,43,Microsoft Windows Vista
+1,3,28,6,15,Sony PSP
+1,2,3,6,12,15,28,42,44,Ruckus CPE
