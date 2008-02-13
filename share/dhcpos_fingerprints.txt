@@ -62,7 +62,7 @@
 1,3,12,43,Etherboot or Sun Blade
 1,2,3,5,6,11,12,13,15,16,17,18,43,54,60,67,128,129,130,131,132,133,134,135,PXE Client
 1,3,3,5,6,11,12,13,15,16,17,18,43,54,60,67,128,129,130,131,132,133,134,135,PXE Client
-1,3,6,15,28,33,IBM WARP 4.1
+1,3,6,15,28,33,IBM WARP 4.1 or Nintendo Wii
 1,3,6,12,15,28,Linksys or Deliberant Router
 1,3,6,15,28,54,Linksys Router
 1,28,2,3,15,6,12,4,7,23,26,43,50,51,54,55,60,61,Linksys Router
@@ -97,7 +97,7 @@
 1,28,3,6,15,Apple Airport
 1,3,6,12,15,43,66,67,128,129,130,131,132,133,134,135,Symbol Wireless Access Point
 3,6,XBox
-1,3,6,XBox 360
+1,3,6,XBox or XBox 360 or Nintendo DS/DS Lite
 3,15,6,PlayStation 2
 3,6,26,28,58,59,Gamecube
 28,2,3,15,6,12,TiVo or Debian Unstable 3
@@ -135,3 +135,8 @@
 1,15,3,6,44,46,47,31,33,121,249,43,Microsoft Windows Vista
 1,3,28,6,15,Sony PSP
 1,2,3,6,12,15,28,42,44,Ruckus CPE
+1,3,6,15,44,46,47,Slingbox or Windows Mobile
+1,3,6,12,15,28,42,40,38,23,37,38,39,19,26,Weathergoose Monitor
+1,3,15,6,Sony PS2 or PS3
+58,59,1,28,121,33,3,12,119,15,6,40,41,42,26,System Rescue CD
+6,Systm Rescue CD
