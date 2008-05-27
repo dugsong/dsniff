@@ -131,8 +131,9 @@
 1,3,6,26,28,58,59,Nintendo Game Cube
 1,3,6,12,15,28,40,41,42,OpenWRT Kamikaze
 1,15,3,6,44,46,47,31,33,249,43,252,121,15,3,6,44,46,47,31,33,249,43,252,Microsoft Windows XP
-1,3,6,15,119,95,252,44,46,47,Apple iPhone
+1,3,6,15,119,95,252,44,46,47,MacOSX Leopard or Apple iPhone
 1,15,3,6,44,46,47,31,33,121,249,43,Microsoft Windows Vista
+1,15,3,6,44,46,47,31,33,121,249,43,252,Microsoft Windows Vista
 1,3,28,6,15,Sony PSP
 1,2,3,6,12,15,28,42,44,Ruckus CPE
 1,3,6,15,44,46,47,Slingbox or Windows Mobile
