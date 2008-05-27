@@ -11,7 +11,7 @@ port of Michal Zalewski's p0fv2 passive OS fingerprinting tool
 
 # XXX - TODO: RST fingerprinting, masquerade/NAT detection, diagnostics
 
-import struct, sys, time
+import struct, time
 import dpkt
 
 PACKET_BIG = 100
@@ -295,7 +295,7 @@ def sig_to_string(sig):
         elif o == dpkt.tcp.TCP_OPT_EOL:
             ol.append('E')
         else:
-            ol.append('?%d' % op)
+            ol.append('?%d' % o)
     if ol:
         l.append(','.join(ol))
     else:
