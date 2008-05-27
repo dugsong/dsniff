@@ -1,6 +1,7 @@
 # $Id$
 
 import dsniff
+import sys
 from dsniff.core import flow
 from dsniff.lib import net
 
