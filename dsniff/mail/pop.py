@@ -1,6 +1,6 @@
 # $Id$
 
-import email.Parser
+import base64, email.Parser
 import dsniff
 from dsniff.lib import io
 
