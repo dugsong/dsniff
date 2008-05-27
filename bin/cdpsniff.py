@@ -5,7 +5,6 @@
 import pprint
 import dnet, dpkt
 import dsniff
-import cPickle
 import sys
 
 class CDPSniff(dsniff.Handler):
