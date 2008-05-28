@@ -20,7 +20,7 @@ class ArpWatch(dsniff.Handler):
 
     def teardown(self):
         cPickle.dump(self.cache, open(self.filename, 'wb'))
-        print >>sys.stderr, 'saved %s entries to %s' % (len(self.cache), self.opts.filename)
+        print >>sys.stderr, 'saved %s entries to %s' % (len(self.cache), self.filename)
 
     def recv_pkt(self, pc, pkt):
         arp = dpkt.ethernet.Ethernet(pkt).arp
