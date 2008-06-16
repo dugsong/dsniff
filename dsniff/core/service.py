@@ -19,21 +19,27 @@ _services = {
 
 try:
     import appid
-    class ServiceHandler(dsniff.Handler):
-        name = 'service'
-        auto = False
+    appid_loaded = True
+except ImportError, e:
+    appid_loaded = False
+    pass
 
-        def setup(self):
-            if self.auto:
-                self.subscribe('flow', 'tcp or udp', self.recv_flow)
-            else:
-                self._register = self.__proxy_register
-                self._unregister = self.__proxy_unregister
+class ServiceHandler(dsniff.Handler):
+    name = 'service'
+    auto = False
 
-        def recv_flow(self, f):
-            if '_service' in f.save:
-                self.publish(f.save['_service'], f)
-                return
+    def setup(self):
+        if self.auto:
+            self.subscribe('flow', 'tcp or udp', self.recv_flow)
+        else:
+            self._register = self.__proxy_register
+            self._unregister = self.__proxy_unregister
+
+    def recv_flow(self, f):
+        if '_service' in f.save:
+            self.publish(f.save['_service'], f)
+            return
+        if appid_loaded:
             if f.state == flow.FLOW_START:
                 for half in f.half.itervalues():
                     half.save['_appid'] = appid.appid()
@@ -70,28 +76,26 @@ try:
                         del half.save['_appid']
                     f.unregister(self.recv_flow)
 
-        def __event_to_fcaps(self, event):
-            if event in _services:
-                return [ _services[event] ]
-            svcs = net.serv_aton(event)
-            l = []
-            for p in (1, 6, 17):
-                ports = [ str(svc[1]) for svc in svcs if svc[0] == p ]
-                if ports:
-                    l.append('%s and dst port %s' %
-                             (net.proto_ntoa(p), ' or '.join(ports)))
-            return l
+    def __event_to_fcaps(self, event):
+        if event in _services:
+            return [ _services[event] ]
+        svcs = net.serv_aton(event)
+        l = []
+        for p in (1, 6, 17):
+            ports = [ str(svc[1]) for svc in svcs if svc[0] == p ]
+            if ports:
+                l.append('%s and dst port %s' %
+                         (net.proto_ntoa(p), ' or '.join(ports)))
+        return l
 
-        def __proxy_register(self, event, callback):
-            # XXX - just proxy to FlowHandler
-            fcaps = self.__event_to_fcaps(event)
-            for fcap in fcaps:
-                self.subscribe('flow', fcap, callback)
+    def __proxy_register(self, event, callback):
+        # XXX - just proxy to FlowHandler
+        fcaps = self.__event_to_fcaps(event)
+        for fcap in fcaps:
+            self.subscribe('flow', fcap, callback)
 
-        def __proxy_unregister(self, event, callback):
-            # XXX - just proxy to FlowHandler
-            fcaps = self.__event_to_fcaps(event)
-            for fcap in fcaps:
-                self.unsubscribe('flow', fcap, callback)
-except ImportError, e:
-    pass
+    def __proxy_unregister(self, event, callback):
+        # XXX - just proxy to FlowHandler
+        fcaps = self.__event_to_fcaps(event)
+        for fcap in fcaps:
+            self.unsubscribe('flow', fcap, callback)
